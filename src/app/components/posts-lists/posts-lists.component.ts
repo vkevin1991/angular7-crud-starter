@@ -9,18 +9,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./posts-lists.component.scss']
 })
 export class PostsListsComponent implements OnInit {
-  posts;
+  posts: Post[];
   constructor(
     private postService: PostService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.posts = this.postService.getPosts();
+    this.postService.getPosts().subscribe( (posts: Post[]) => {
+      this.posts = posts;
+    });
   }
 
   editPost(postId){
     this.router.navigate(['/edit-post'], { queryParams: { postId: postId } });
+  }
+
+  deletePost(postId){
+    this.postService.deletePost(postId).subscribe( () => {
+      const postIndex = this.posts.findIndex( (post) => post.id === postId);
+      this.posts.splice(postIndex, 1);
+    });
   }
 
 }

@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let post of posts | async">
+    <tr *ngFor="let post of posts">
       <th>{{ post.id }}</th>
       <td>{{ post.title }}</td>
       <td>{{ post.text }}</td>
@@ -18,7 +18,7 @@
       </td>
       <td>
         <a class="button is-primary is-outlined" (click)="editPost(post.id)">Edit</a>
-        <a class="button is-danger is-outlined">Delete</a>
+        <a class="button is-danger is-outlined" (click)="deletePost(post.id)">Delete</a>
       </td>
     </tr>
   </tbody>
