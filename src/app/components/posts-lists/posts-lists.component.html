@@ -17,7 +17,7 @@
         <span class="tag is-info" *ngFor="let category of post.categories"><a class="tag-link">{{ category.name }} </a></span>
       </td>
       <td>
-        <a class="button is-primary is-outlined">Edit</a>
+        <a class="button is-primary is-outlined" (click)="editPost(post.id)">Edit</a>
         <a class="button is-danger is-outlined">Delete</a>
       </td>
     </tr>

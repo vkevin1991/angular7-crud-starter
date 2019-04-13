@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/post.service';
 import { Post } from 'src/app/models/Post';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-posts-lists',
@@ -10,11 +11,16 @@ import { Post } from 'src/app/models/Post';
 export class PostsListsComponent implements OnInit {
   posts;
   constructor(
-    private postService: PostService
+    private postService: PostService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.posts = this.postService.getPosts();
+  }
+
+  editPost(postId){
+    this.router.navigate(['/edit-post'], { queryParams: { postId: postId } });
   }
 
 }
