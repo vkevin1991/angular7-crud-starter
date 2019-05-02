@@ -15,4 +15,20 @@ export class CategoryService {
   getCategories() {
     return this.http.get(`${this.apiUrl}/category`);
   }
+
+  getCategory(categoryId) {
+    return this.http.get(`${this.apiUrl}/category/${categoryId}`);
+  }
+
+  addCategory(data) {
+    return this.http.post(`${this.apiUrl}/category`, data);
+  }
+
+  editCategory(data) {
+    return this.http.put(`${this.apiUrl}/category/${data.id}`, data);
+  }
+
+  deleteCategory(categoryId) {
+    return this.http.delete(`${this.apiUrl}/category/${categoryId}`);
+  }
 }
