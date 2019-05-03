@@ -1,6 +1,9 @@
+<app-header></app-header>
 <section class="section">
     <div class="container">
-        <a class="button is-success" [routerLink]="['/add-post']">Add Post</a>
+        <h1 class="title">Posts</h1>
+        <a class="button is-success" [routerLink]="['/add-post']" *ngIf="checkPermission('postpost')">Add Post</a>
     </div>
+    <app-posts-lists></app-posts-lists>
 </section>
-<app-posts-lists></app-posts-lists>
+

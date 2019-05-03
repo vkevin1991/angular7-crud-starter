@@ -6,6 +6,7 @@ import { Post } from 'src/app/models/Post';
 import { PostService } from 'src/app/post.service';
 import { CategoryService } from 'src/app/category.service';
 import { Category } from 'src/app/models/Category';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-edit-category',
@@ -25,10 +26,14 @@ export class EditCategoryComponent implements OnInit {
     private data: DataService,
     private formBuilder: FormBuilder,
     private postService: PostService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
+    if (!this.checkPermission('putcategory')) {
+      this.router.navigate(['/category']);
+    }
     this.data.changeTitle("Edit Category")
 
     this.editForm = this.formBuilder.group({
@@ -41,16 +46,16 @@ export class EditCategoryComponent implements OnInit {
     }
     this.categoryId = categoryId;
     this.categoryService.getCategory(categoryId).subscribe((category: any) => {
-      // post.categories = post.categories.map((category: Category) => {
-      //   return category.id;
-      // })
       this.editForm.patchValue(category);
     });
   }
 
+  checkPermission(key: string) {
+    return this.authService.evaluatePermissions(key);
+  }
+
   onSubmit() {
     this.submitted = true;
-    console.log(this.editForm.value)
 
     if (this.editForm.valid) {
       this.categoryService.editCategory(this.editForm.value)
@@ -58,6 +63,10 @@ export class EditCategoryComponent implements OnInit {
           this.router.navigate(['/category']);
         });
     }
+  }
+
+  cancel() {
+    this.router.navigate(['/category']);
   }
 
   get f() { return this.editForm.controls; }

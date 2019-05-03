@@ -5,6 +5,7 @@ import { CategoryService } from '../../../category.service';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/models/Category';
 import { PostService } from 'src/app/post.service';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-add-category',
@@ -21,14 +22,22 @@ export class AddCategoryComponent implements OnInit {
     private categoryService: CategoryService,
     private formBuilder: FormBuilder,
     private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
+    if (!this.checkPermission('postcategory')) {
+      this.router.navigate(['/category']);
+    }
     this.data.changeTitle("Add Category")
     this.addForm = this.formBuilder.group({
       id: [],
       name: ['', Validators.required]
     });
+  }
+
+  checkPermission(key: string) {
+    return this.authService.evaluatePermissions(key);
   }
 
   onSubmit() {
@@ -39,6 +48,9 @@ export class AddCategoryComponent implements OnInit {
           this.router.navigate(['/category']);
         });
     }
+  }
+  cancel(){
+    this.router.navigate(['/category']);
   }
 
   get f() { return this.addForm.controls;}

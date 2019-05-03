@@ -6,6 +6,7 @@ import { Post } from 'src/app/models/Post';
 import { PostService } from 'src/app/post.service';
 import { CategoryService } from 'src/app/category.service';
 import { Category } from 'src/app/models/Category';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-edit-post',
@@ -25,10 +26,14 @@ export class EditPostComponent implements OnInit {
     private data: DataService,
     private formBuilder: FormBuilder,
     private postService: PostService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
+    if (!this.checkPermission('putpost')) {
+      this.router.navigate(['']);
+    }
     this.data.changeTitle("Edit Post")
 
     this.categoryService.getCategories().subscribe((data: Category[]) => {
@@ -57,6 +62,9 @@ export class EditPostComponent implements OnInit {
         })
       });
   }
+  checkPermission(key: string) {
+    return this.authService.evaluatePermissions(key);
+  }
 
   onSubmit(){
     this.submitted = true;
@@ -68,6 +76,10 @@ export class EditPostComponent implements OnInit {
         this.router.navigate(['']);
       });
     }
+  }
+
+  cancel() {
+    this.router.navigate(['']);
   }
 
   get f() { return this.editForm.controls; }

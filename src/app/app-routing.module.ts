@@ -10,6 +10,8 @@ import { EditCategoryComponent } from './components/category/edit-category/edit-
 import { AddCategoryComponent } from './components/category/add-category/add-category.component';
 import { UserListComponent } from './components/users/user-list/user-list.component';
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
+import { CategoryhomeComponent } from './components/category/categoryhome/categoryhome.component';
+import { UserhomeComponent } from './components/users/userhome/userhome.component';
 
 const routes: Routes = [
   {
@@ -35,7 +37,7 @@ const routes: Routes = [
   },
   {
     path: 'category',
-    component: CategoryListComponent,
+    component: CategoryhomeComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -50,7 +52,7 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    component: UserListComponent,
+    component: UserhomeComponent,
     canActivate: [AuthGuard]
   },
   {

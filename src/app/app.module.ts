@@ -22,6 +22,8 @@ import { AddCategoryComponent } from './components/category/add-category/add-cat
 import { RouterModule } from '@angular/router';
 import { UserListComponent } from './components/users/user-list/user-list.component';
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
+import { CategoryhomeComponent } from './components/category/categoryhome/categoryhome.component';
+import { UserhomeComponent } from './components/users/userhome/userhome.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +38,9 @@ import { EditUserComponent } from './components/users/edit-user/edit-user.compon
     EditCategoryComponent,
     AddCategoryComponent,
     UserListComponent,
-    EditUserComponent
+    EditUserComponent,
+    CategoryhomeComponent,
+    UserhomeComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +51,12 @@ import { EditUserComponent } from './components/users/edit-user/edit-user.compon
       },
       {
         path: '',
+        redirectTo: 'list-post',
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
+      },
+      {
+        path: '**',
         redirectTo: 'list-post',
         pathMatch: 'full',
         canActivate: [AuthGuard]

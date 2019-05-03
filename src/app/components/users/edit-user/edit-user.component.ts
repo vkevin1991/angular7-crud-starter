@@ -6,6 +6,7 @@ import { Post } from 'src/app/models/Post';
 import { PostService } from 'src/app/post.service';
 import { UserService } from 'src/app/user.service';
 import { Category } from 'src/app/models/Category';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -25,9 +26,13 @@ export class EditUserComponent implements OnInit {
     private data: DataService,
     private formBuilder: FormBuilder,
     private userService: UserService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
+    if (!this.checkPermission('all')) {
+      this.router.navigate(['']);
+    }
     this.data.changeTitle("Edit User")
 
     this.userService.getRoles().subscribe((data: Category[]) => {
@@ -56,6 +61,10 @@ export class EditUserComponent implements OnInit {
     }
   }
 
+  checkPermission(key: string) {
+    return this.authService.evaluatePermissions(key);
+  }
+
   onSubmit() {
     this.submitted = true;
     let currentUser = this.editForm.value;
@@ -74,6 +83,10 @@ export class EditUserComponent implements OnInit {
           });
       }
     }
+  }
+
+  cancel() {
+    this.router.navigate(['/user']);
   }
 
   get f() { return this.editForm.controls; }
