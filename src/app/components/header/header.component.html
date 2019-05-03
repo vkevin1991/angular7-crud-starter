@@ -4,13 +4,13 @@
       <a class="navbar-item brand-text">
         Laureate
       </a>
-      <div class="navbar-burger burger" data-target="navMenu">
+      <div class="navbar-burger burger" data-target="navMenu" [ngClass]="{'is-active': openMenu}" (click)="toogleMenu()">
         <span></span>
         <span></span>
         <span></span>
       </div>
     </div>
-    <div id="navMenu" class="navbar-menu">
+    <div id="navMenu" class="navbar-menu" [ngClass]="{'is-active': openMenu}" >
       <div class="navbar-start">
         <a class="navbar-item" routerLink="" *ngIf="checkPermission('getpost')">
           Posts
