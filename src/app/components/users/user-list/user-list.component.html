@@ -1,3 +1,26 @@
-<p>
-  user-list works!
-</p>
+<section class="section">
+  <div class="container">
+    <a class="button is-success" [routerLink]="['/user/create']">Create an User</a>
+  </div>
+</section>
+<table class="table is-hoverable is-fullwidth">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>Role</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <th>{{ user.id }}</th>
+      <td>{{ user.name }}</td>
+      <td>{{user.role.role}}</td>
+      <td>
+        <a class="button is-primary is-outlined" (click)="editUser(user.id)">Edit</a>
+        <a class="button is-danger is-outlined" (click)="deleteUser(user.id)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -21,6 +21,7 @@ import { EditCategoryComponent } from './components/category/edit-category/edit-
 import { AddCategoryComponent } from './components/category/add-category/add-category.component';
 import { RouterModule } from '@angular/router';
 import { UserListComponent } from './components/users/user-list/user-list.component';
+import { EditUserComponent } from './components/users/edit-user/edit-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,8 @@ import { UserListComponent } from './components/users/user-list/user-list.compon
     CategoryListComponent,
     EditCategoryComponent,
     AddCategoryComponent,
-    UserListComponent
+    UserListComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,

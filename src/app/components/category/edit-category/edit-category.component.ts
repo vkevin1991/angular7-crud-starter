@@ -13,7 +13,6 @@ import { Category } from 'src/app/models/Category';
   styleUrls: ['./edit-category.component.scss']
 })
 export class EditCategoryComponent implements OnInit {
-
   categoryId: string;
   editForm: FormGroup;
   submitted: boolean = false;

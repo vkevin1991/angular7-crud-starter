@@ -9,12 +9,9 @@ import { AuthGuard } from './guards/auth-guard.service';
 import { EditCategoryComponent } from './components/category/edit-category/edit-category.component';
 import { AddCategoryComponent } from './components/category/add-category/add-category.component';
 import { UserListComponent } from './components/users/user-list/user-list.component';
+import { EditUserComponent } from './components/users/edit-user/edit-user.component';
 
 const routes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent
-  },
   {
     path: '',
     redirectTo: 'list-post',
@@ -54,6 +51,11 @@ const routes: Routes = [
   {
     path: 'user',
     component: UserListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'user/:id',
+    component: EditUserComponent,
     canActivate: [AuthGuard]
   }
 ];
