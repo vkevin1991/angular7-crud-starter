@@ -20,6 +20,7 @@ export class EditUserComponent implements OnInit {
   user: any;
   roles: any;
   isCreate: boolean = false;
+  error: any;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -75,11 +76,15 @@ export class EditUserComponent implements OnInit {
         this.userService.addUser(currentUser)
           .subscribe(data => {
             this.router.navigate(['/user']);
-          });
+          },error=>{
+            this.error = error.error;
+          })
       }else{
         this.userService.editUser(this.editForm.value)
           .subscribe(data => {
             this.router.navigate(['/user']);
+          }, error=>{
+            this.error = error.error;
           });
       }
     }
